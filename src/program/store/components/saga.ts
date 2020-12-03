@@ -8,7 +8,7 @@ import {
 } from "./dispatchers";
 import {EntitiesActions} from "../entities";
 import {updateEntityDispatchAction} from "../entities/dispatchers";
-import {Factory} from "../../factory";
+import {Program} from "../../program";
 
 /** Initial saga **/
 export function* componentsSaga() {
@@ -25,7 +25,7 @@ function* add(action: IAddComponentAction) {
     yield put<ComponentsActions>(addComponentDispatchActionSuccess(action.componentEnum));
 }
 function* addEntity(action: IAddEntityComponentAction<any>) {
-    const { defaultData } = Factory.getInstance().componentsFactory.components.get(action.componentEnum);
+    const { defaultData } = Program.getInstance().game.components.get(action.componentEnum);
     yield put<EntitiesActions>(updateEntityDispatchAction(action.entityId, action.componentData || defaultData))
     yield put<ComponentsActions>(addEntityComponentDispatchActionSuccess(action.componentEnum, action.entityId));
 }

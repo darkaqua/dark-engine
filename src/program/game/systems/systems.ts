@@ -1,14 +1,18 @@
 import {SystemAbstract} from "./system/system.abstract";
 import {Movement} from "./movement/movement";
 
-export class SystemsFactory {
+export class Systems {
 
-    public readonly systems: SystemAbstract[];
+    private readonly systems: SystemAbstract[];
 
     constructor() {
         this.systems = [
             new Movement()
         ];
+    }
+
+    get list() {
+        return this.systems;
     }
 
     update(delta: number) {

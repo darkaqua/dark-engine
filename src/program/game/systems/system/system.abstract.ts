@@ -1,6 +1,6 @@
 import {ComponentEnum} from "../../components/component/component.enum";
 import {getComponentEntities} from "../../../store/components";
-import {Factory} from "../../../factory";
+import {Program} from "../../../program";
 import {EntityAbstract} from "../../entities/entity/entity.abstract";
 
 export abstract class SystemAbstract {
@@ -20,11 +20,11 @@ export abstract class SystemAbstract {
     }
 
     getEntities(): EntityAbstract[] {
-        const factory = Factory.getInstance();
+        const program = Program.getInstance();
         const entityList = this.components.map(getComponentEntities).flat(2);
         const entityCountMap = new Map([...new Set(entityList)].map(x => [x, entityList.filter(y => y === x).length] ));
         return [...new Set(entityList.filter(o => entityCountMap.get(o) === this.components.length))]
-            .map(entityId => factory.entitiesFactory.getEntity(entityId));
+            .map(entityId => program.game.entities.get(entityId));
     }
 
 }

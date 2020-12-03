@@ -7,9 +7,9 @@ import {ComponentTypes} from "../../components/component/component.types";
 import {getEntity} from "../../../store/entities";
 import {addEntityDispatchAction, updateEntityDispatchAction} from "../../../store/entities/dispatchers";
 import {v4} from "uuid";
-import {Factory} from "../../../factory";
+import {Program} from "../../../program";
 
-const store = Factory.getInstance().storeFactory.store;
+const store = Program.getInstance().store;
 
 export abstract class EntityAbstract {
 

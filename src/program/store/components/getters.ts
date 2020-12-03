@@ -1,9 +1,9 @@
 import {ComponentEnum} from "../../game/components/component/component.enum";
 import {ComponentInterface} from "../../game/components/component/component.interface";
-import {Factory} from "../../factory";
+import {Program} from "../../program";
 
 export const getComponentsState = () =>
-    Factory.getInstance().storeFactory.store.getState().components;
+    Program.getInstance().store.getState().components;
 
 export const getComponentState = (componentEnum: ComponentEnum): ComponentInterface =>
     getComponentsState()[componentEnum];
