@@ -1,5 +1,6 @@
 import {SystemAbstract} from "./system/system.abstract";
 import {Movement} from "./movement/movement";
+import {Renderable} from "./renderable/renderable";
 
 export class Systems {
 
@@ -7,7 +8,8 @@ export class Systems {
 
     constructor() {
         this.systems = [
-            new Movement()
+            new Movement(),
+            new Renderable()
         ];
     }
 
@@ -16,7 +18,7 @@ export class Systems {
     }
 
     update(delta: number) {
-        this.systems.map(system => system.update(delta));
+        this.list.map(system => system.update(delta));
     }
 
 }

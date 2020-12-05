@@ -5,6 +5,8 @@ import {TagInterface} from "../../components/tag/tag.interface";
 import {EntityAbstract} from "../../entities/entity/entity.abstract";
 import {TargetDirectionInterface} from "../../components/targetDirection/targetDirection.interface";
 import {TargetDirectionEnum} from "../../components/targetDirection/targetDirection.enum";
+import {ContainerInterface} from "../../components/container/container.interface";
+import {Program} from "../../../program";
 
 export class Movement extends SystemAbstract {
 
@@ -16,20 +18,29 @@ export class Movement extends SystemAbstract {
         ]);
     }
 
+    initEntity(entity: EntityAbstract) {
+
+    }
+
     updateEntity(delta: number, entity: EntityAbstract) {
-        const { position, tag, targetDirection } = entity.getData<PositionInterface & TagInterface & TargetDirectionInterface>()
+        const {
+            position,
+            tag,
+            targetDirection,
+            container
+        } = entity.getData<PositionInterface & TagInterface & TargetDirectionInterface & ContainerInterface>()
 
         switch (targetDirection) {
             case TargetDirectionEnum.NONE:
                 return;
             case TargetDirectionEnum.TOP:
-                position.y++;
+                position.y--;
                 break;
             case TargetDirectionEnum.RIGHT:
                 position.x++;
                 break;
             case TargetDirectionEnum.BOTTOM:
-                position.y--;
+                position.y++;
                 break;
             case TargetDirectionEnum.LEFT:
                 position.x--;
@@ -47,7 +58,11 @@ export class Movement extends SystemAbstract {
             return;
         }
 
-        console.log(tag.username, 'move', TargetDirectionEnum[targetDirection], position)
+        if(container && container.visible) {
+            const entityContainer = Program.getInstance().canvas.stage.getChildByName(entity.id);
+            if(entityContainer)
+                entityContainer.position.set(position.x, position.y)
+        }
 
         entity.updateData<PositionInterface>({ position });
     }

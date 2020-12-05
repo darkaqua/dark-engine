@@ -2,5 +2,6 @@
 export enum ComponentEnum {
     POSITION = 'position',
     TAG = 'tag',
-    TARGET_DIRECTION = 'targetDirection'
+    TARGET_DIRECTION = 'targetDirection',
+    CONTAINER = 'container'
 }

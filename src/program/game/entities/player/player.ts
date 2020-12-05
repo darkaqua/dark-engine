@@ -13,6 +13,7 @@ export class Player extends EntityAbstract {
         this.addComponent(ComponentEnum.TARGET_DIRECTION, { targetDirection } );
         this.addComponent(ComponentEnum.POSITION, { position } );
         this.addComponent(ComponentEnum.TAG, { tag: { username } });
+        this.addComponent(ComponentEnum.CONTAINER, { container: { visible: true } })
     }
 
 }

@@ -7,6 +7,7 @@ import {addComponentDispatchAction} from "../../store/components/dispatchers";
 import {Store} from "redux";
 import {Actions, DefaultState} from "../../store/store.definitions";
 import {ComponentTypes} from "./component/component.types";
+import {Container} from "./container/container";
 
 export class Components {
 
@@ -18,6 +19,7 @@ export class Components {
         this.addComponent(store, ComponentEnum.POSITION, new Position());
         this.addComponent(store, ComponentEnum.TAG, new Tag());
         this.addComponent(store, ComponentEnum.TARGET_DIRECTION, new TargetDirection());
+        this.addComponent(store, ComponentEnum.CONTAINER, new Container());
     }
 
     get list() {
