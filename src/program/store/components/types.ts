@@ -33,7 +33,7 @@ export type ComponentsActions =
     | IRemoveEntityComponentActionSuccess
 
 /** Default State Values **/
-export const componentsDefaultState = (): ComponentsState => <ComponentsState>({
+export const componentsDefaultState = (): ComponentsState => ({
     [ComponentEnum.POSITION]: { entities: [] },
     [ComponentEnum.TAG]: { entities: [] }
 });
