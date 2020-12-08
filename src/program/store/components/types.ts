@@ -35,7 +35,9 @@ export type ComponentsActions =
 /** Default State Values **/
 export const componentsDefaultState = (): ComponentsState => ({
     [ComponentEnum.POSITION]: { entities: [] },
-    [ComponentEnum.TAG]: { entities: [] }
+    [ComponentEnum.TAG]: { entities: [] },
+    [ComponentEnum.CONTAINER]: { entities: [] },
+    [ComponentEnum.TARGET_DIRECTION]: { entities: [] }
 });
 
 /** State **/
