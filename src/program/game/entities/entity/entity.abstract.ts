@@ -29,7 +29,7 @@ export abstract class EntityAbstract {
         store.dispatch(updateEntityDispatchAction<TData>(this.id, data))
     }
    
-    addComponent: AddComponentInterface = function(componentEnum, componentData) {
+    addComponent: AddComponentInterface = (componentEnum, componentData) => {
         store.dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
     }
 
