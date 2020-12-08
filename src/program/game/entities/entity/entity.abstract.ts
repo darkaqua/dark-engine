@@ -3,7 +3,7 @@ import {
     addEntityComponentDispatchAction,
     removeEntityComponentDispatchAction
 } from "../../../store/components/dispatchers";
-import {ComponentTypes} from "../../components/component/component.types";
+import {AddComponentInterface, ComponentTypes} from "../../components/component/component.types";
 import {getEntity} from "../../../store/entities";
 import {addEntityDispatchAction, updateEntityDispatchAction} from "../../../store/entities/dispatchers";
 import {v4} from "uuid";
@@ -27,8 +27,8 @@ export abstract class EntityAbstract {
     updateData<TData extends ComponentTypes>(data: TData) {
         store.dispatch(updateEntityDispatchAction<TData>(this.id, data))
     }
-
-    addComponent(componentEnum: ComponentEnum, componentData?: ComponentTypes) {
+   
+    addComponent : AddComponentInterface = function(componentEnum, componentData) {
         store.dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
     }
 
