@@ -1,7 +1,6 @@
+import * as PIXI from 'pixi.js';
+import {ComponentEnum} from "../component/component.enum";
 
 export interface PositionInterface {
-    position: {
-        x: number;
-        y: number;
-    }
+    [ComponentEnum.POSITION]: PIXI.IPointData
 }

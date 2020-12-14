@@ -1,6 +1,7 @@
+import {ComponentEnum} from "../component/component.enum";
 
 export interface ContainerInterface {
-    container: {
+    [ComponentEnum.CONTAINER]: {
         visible: true
     }
 }

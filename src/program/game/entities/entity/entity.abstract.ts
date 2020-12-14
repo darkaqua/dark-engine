@@ -9,16 +9,21 @@ import {addEntityDispatchAction, updateEntityDispatchAction} from "../../../stor
 import {v4} from "uuid";
 import {Program} from "../../../program";
 import {AddComponentInterface} from "../../components/component/component.types.map";
+import {EntityEnum} from "./entity.enum";
 
-const store = Program.getInstance().store;
+const getStore = () => Program.getInstance().store;
 
 export abstract class EntityAbstract {
 
     public readonly id: string;
+    public readonly entityEnum: EntityEnum;
 
-    protected constructor() {
+    protected constructor(
+        entityEnum = EntityEnum.NONE
+    ) {
         this.id = v4();
-        store.dispatch(addEntityDispatchAction(this.id));
+        this.entityEnum = entityEnum;
+        getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum));
     }
 
     getData<TData extends ComponentTypes>() {
@@ -26,15 +31,15 @@ export abstract class EntityAbstract {
     }
 
     updateData<TData extends ComponentTypes>(data: TData) {
-        store.dispatch(updateEntityDispatchAction<TData>(this.id, data))
+        getStore().dispatch(updateEntityDispatchAction<TData>(this.id, data))
     }
-   
+
     addComponent: AddComponentInterface = (componentEnum, componentData) => {
-        store.dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
+        getStore().dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
     }
 
     removeComponent(componentEnum: ComponentEnum) {
-        store.dispatch(removeEntityComponentDispatchAction(componentEnum, this.id));
+        getStore().dispatch(removeEntityComponentDispatchAction(componentEnum, this.id));
     }
 
 }

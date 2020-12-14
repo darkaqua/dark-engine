@@ -26,7 +26,13 @@ function* add(action: IAddComponentAction) {
 }
 function* addEntity(action: IAddEntityComponentAction<any>) {
     const { defaultData } = Program.getInstance().game.components.get(action.componentEnum);
-    yield put<EntitiesActions>(updateEntityDispatchAction(action.entityId, action.componentData || defaultData))
+    const entityData = {
+        [action.componentEnum]: {
+            ...defaultData[action.componentEnum],
+            ...action.componentData[action.componentEnum]
+        }
+    }
+    yield put<EntitiesActions>(updateEntityDispatchAction(action.entityId, entityData))
     yield put<ComponentsActions>(addEntityComponentDispatchActionSuccess(action.componentEnum, action.entityId));
 }
 

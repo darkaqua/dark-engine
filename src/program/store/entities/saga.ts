@@ -18,7 +18,7 @@ export function* entitiesSaga() {
 /** Saga functions **/
 //
 function* add(action: IAddEntityAction<any>) {
-    yield put<EntitiesActions>(addEntityDispatchActionSuccess(action.id, action.entityData));
+    yield put<EntitiesActions>(addEntityDispatchActionSuccess(action.id, action.entityEnum, action.entityData));
 }
 
 function* update(action: IUpdateEntityAction<any>) {

@@ -3,13 +3,17 @@ import {PositionInterface} from "../position/position.interface";
 import {TagInterface} from "../tag/tag.interface";
 import {TargetDirectionInterface} from "../targetDirection/targetDirection.interface";
 import {ContainerInterface} from "../container/container.interface";
+import {SpriteInterface} from "../sprite/sprite.interface";
+import {FollowCameraInterface} from "../followCamera/followCamera.interface";
 
 // TODO: Can we check that all enum items are updated here? Otherwise this map needs to be updated manually
 export type ComponentTypeInterfaceMap = {
-    [ComponentEnum.POSITION]: PositionInterface,
     [ComponentEnum.TAG]: TagInterface,
+    [ComponentEnum.CONTAINER]: ContainerInterface,
+    [ComponentEnum.SPRITE]: SpriteInterface,
     [ComponentEnum.TARGET_DIRECTION]: TargetDirectionInterface,
-    [ComponentEnum.CONTAINER]: ContainerInterface
+    [ComponentEnum.POSITION]: PositionInterface,
+    [ComponentEnum.FOLLOW_CAMERA]: FollowCameraInterface,
 }
 
 // Overload function declaration => https://stackoverflow.com/questions/50374908/transform-union-type-to-intersection-type

@@ -1,10 +1,12 @@
 import {EntitiesActionTypes} from "./types";
+import {EntityEnum} from "../../game/entities/entity/entity.enum";
 
 
 /** Saga Actions **/
 export interface IAddEntityAction<TEntityData> {
     type: typeof EntitiesActionTypes.ADD
     id: string;
+    entityEnum: EntityEnum;
     entityData: TEntityData;
 }
 export interface IUpdateEntityAction<TEntityData> {
@@ -21,6 +23,7 @@ export interface IRemoveEntityAction {
 export interface IAddEntityActionSuccess<TEntityData> {
     type: typeof EntitiesActionTypes.ADD_SUCCESS
     id: string;
+    entityEnum: EntityEnum;
     entityData: TEntityData;
 }
 export interface IUpdateEntityActionSuccess<TEntityData> {

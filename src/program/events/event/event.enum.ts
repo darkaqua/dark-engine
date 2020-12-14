@@ -1,0 +1,22 @@
+
+export enum EventEnum {
+    PROGRAM_LOAD,
+
+    WINDOW_RESIZE,
+
+    TEXTURES_LOAD,
+
+    LOAD,
+    UPDATE,
+
+    CAMERA_UPDATE,
+
+    KEYBOARD_KEY,
+
+    FOCUS_IN,
+    FOCUS_OUT,
+
+    CURSOR_RIGHT,
+    CURSOR_LEFT,
+    CURSOR_MOVE
+}

@@ -8,6 +8,7 @@ import {
     IUpdateEntityActionSuccess
 } from "./actions";
 import {ComponentTypes} from "../../game/components/component/component.types";
+import {EntityEnum} from "../../game/entities/entity/entity.enum";
 
 /** Action Types **/
 export enum EntitiesActionTypes {
@@ -37,5 +38,8 @@ export const entitiesDefaultState = (): EntitiesState => ({ });
 
 /** State **/
 export interface EntitiesState {
-    [id: string]: ComponentTypes
+    [id: string]: ComponentTypes & {
+        entityId: string;
+        entityEnum: EntityEnum;
+    }
 }

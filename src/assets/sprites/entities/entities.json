@@ -1,0 +1,44 @@
+{ "frames": {
+   "player": {
+    "frame": { "x": 0, "y": 0, "w": 8, "h": 16 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 16 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "enemy": {
+    "frame": { "x": 8, "y": 0, "w": 8, "h": 16 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 0, "w": 8, "h": 16 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "cursor": {
+    "frame": { "x": 16, "y": 0, "w": 4, "h": 4 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 26, "y": 2, "w": 4, "h": 4 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "entities.png",
+  "format": "RGBA8888",
+  "size": { "w": 64, "h": 64 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "player", "opacity": 255, "blendMode": "normal" },
+   { "name": "enemy", "opacity": 255, "blendMode": "normal" },
+   { "name": "cursor", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

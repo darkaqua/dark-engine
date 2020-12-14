@@ -7,34 +7,40 @@ import {ContainerInterface} from "../../components/container/container.interface
 import {Program} from "../../../program";
 import {TagInterface} from "../../components/tag/tag.interface";
 
-export class Renderable extends SystemAbstract {
+export class RenderableContainer extends SystemAbstract {
 
     constructor() {
         super([
             ComponentEnum.POSITION,
-            ComponentEnum.CONTAINER,
-            ComponentEnum.TAG
+            ComponentEnum.CONTAINER
         ]);
     }
 
     initEntity(entity: EntityAbstract) {
-        const { position, container, tag } = entity.getData<PositionInterface & ContainerInterface & TagInterface>();
+        const {
+            [ComponentEnum.POSITION]: position,
+            [ComponentEnum.CONTAINER]: container
+        } = entity.getData<PositionInterface & ContainerInterface & TagInterface>();
 
         if(!container.visible) return;
 
-        const sprite = new PIXI.Sprite(PIXI.Texture.WHITE);
-        sprite.name = entity.id;
-        sprite.position.set(position.x, position.y);
-        sprite.interactive = true;
-        sprite.on('click', () => {
-            console.log(tag.username)
-        })
+        const entityContainer = new PIXI.Container();
+        entityContainer.name = entity.id;
+        entityContainer.width = 100;
+        entityContainer.height = 100;
+        entityContainer.position.set(position.x, position.y);
+        entityContainer.interactive = true;
+        entityContainer.on('click', () => {
+            console.log('click', entity.id)
+        });
 
-        Program.getInstance().canvas.stage.addChild(sprite);
+        Program.getInstance().canvas.stage.addChild(entityContainer);
     }
 
     updateEntity(delta: number, entity: EntityAbstract) {
-        const { container } = entity.getData<ContainerInterface>();
+        const {
+            [ComponentEnum.CONTAINER]: container
+        } = entity.getData<ContainerInterface>();
         const canvas = Program.getInstance().canvas;
 
         const containerEntity = canvas.stage.getChildByName(entity.id);

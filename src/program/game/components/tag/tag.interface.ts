@@ -1,6 +1,7 @@
+import {ComponentEnum} from "../component/component.enum";
 
 export interface TagInterface {
-    tag: {
+    [ComponentEnum.TAG]: {
         username: string;
     }
 }

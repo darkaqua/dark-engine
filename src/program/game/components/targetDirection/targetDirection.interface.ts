@@ -1,5 +1,8 @@
 import {TargetDirectionEnum} from "./targetDirection.enum";
+import {ComponentEnum} from "../component/component.enum";
 
 export interface TargetDirectionInterface {
-    targetDirection: TargetDirectionEnum;
+    [ComponentEnum.TARGET_DIRECTION]: {
+        direction: TargetDirectionEnum
+    };
 }

@@ -34,13 +34,15 @@ export type ComponentsActions =
 
 /** Default State Values **/
 export const componentsDefaultState = (): ComponentsState => ({
-    [ComponentEnum.POSITION]: { entities: [] },
-    [ComponentEnum.TAG]: { entities: [] },
-    [ComponentEnum.CONTAINER]: { entities: [] },
-    [ComponentEnum.TARGET_DIRECTION]: { entities: [] }
+    [ComponentEnum.POSITION]:               { entities: [] },
+    [ComponentEnum.SPRITE]:                 { entities: [] },
+    [ComponentEnum.CONTAINER]:              { entities: [] },
+    [ComponentEnum.TARGET_DIRECTION]:       { entities: [] },
+    [ComponentEnum.TAG]:                    { entities: [] },
+    [ComponentEnum.FOLLOW_CAMERA]:          { entities: [] },
 });
 
 /** State **/
 export type ComponentsState = {
-    [id in ComponentEnum]: ComponentInterface;
+    [id in ComponentEnum]: ComponentInterface
 };

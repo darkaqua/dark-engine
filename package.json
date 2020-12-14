@@ -1,6 +1,6 @@
 {
   "name": "dark-engine",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "data": {
     "environment": "development",
     "buildId": "dev-0.0.0"

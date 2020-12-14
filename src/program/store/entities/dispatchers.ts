@@ -6,14 +6,17 @@ import {
     IUpdateEntityAction,
     IUpdateEntityActionSuccess
 } from "./actions";
+import {EntityEnum} from "../../game/entities/entity/entity.enum";
 
 /** Actions **/
 export const addEntityDispatchAction = <TEntityData>(
     id: string,
+    entityEnum: EntityEnum,
     entityData: TEntityData = {} as any
 ): IAddEntityAction<TEntityData> => ({
     type: EntitiesActionTypes.ADD,
     id,
+    entityEnum,
     entityData
 });
 export const updateEntityDispatchAction = <TEntityData>(
@@ -34,10 +37,12 @@ export const removeEntityDispatchAction = (
 /** Saga Actions **/
 export const addEntityDispatchActionSuccess = <TEntityData>(
     id: string,
+    entityEnum: EntityEnum,
     entityData: TEntityData
 ): IAddEntityActionSuccess<TEntityData> => ({
     type: EntitiesActionTypes.ADD_SUCCESS,
     id,
+    entityEnum,
     entityData
 });
 export const updateEntityDispatchActionSuccess = <TEntityData>(

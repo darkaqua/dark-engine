@@ -16,10 +16,10 @@ export abstract class SystemAbstract {
         this.lastUpdateEntityIdList = [];
     }
 
-    abstract initEntity(entity: EntityAbstract);
-    abstract updateEntity(delta: number, entity: EntityAbstract);
+    protected abstract initEntity(entity: EntityAbstract);
+    protected abstract updateEntity(delta: number, entity: EntityAbstract);
 
-    update(delta: number) {
+    public update(delta: number) {
         const entityList = this.getEntities();
         // Update every entity
         entityList
@@ -36,9 +36,9 @@ export abstract class SystemAbstract {
         return this.components.map(getComponentEntities).flat(2);
     }
 
-    getEntities(): EntityAbstract[] {
+    public getEntities(): EntityAbstract[] {
         const program = Program.getInstance();
-        let entityList = this.getEntityIdList();
+        const entityList = this.getEntityIdList();
         const entityCountMap = new Map([...new Set(entityList)].map(x => [x, entityList.filter(y => y === x).length] ));
         return [...new Set(entityList.filter(o => entityCountMap.get(o) === this.components.length))]
             .map(entityId => program.game.entities.get(entityId));
