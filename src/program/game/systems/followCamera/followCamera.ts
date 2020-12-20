@@ -1,3 +1,4 @@
+
 import {SystemAbstract} from "../system/system.abstract";
 import {ComponentEnum} from "../../components/component/component.enum";
 import {PositionInterface} from "../../components/position/position.interface";
@@ -34,11 +35,24 @@ export class FollowCamera extends SystemAbstract {
         if(entityContainer)
             entityContainer.position.set(-cameraPosition.x, -cameraPosition.y);
 
-        position.x = -cameraPosition.x;
-        position.y = -cameraPosition.y;
+        if(cameraPosition.equals(position)) return;
 
-        entity.updateData<PositionInterface>({ [ComponentEnum.POSITION]: position });
+        const targetPosition = {
+            x: cameraPosition.x,
+            y: cameraPosition.y
+        }
 
+        entity.updateData<PositionInterface>({ [ComponentEnum.POSITION]: targetPosition });
+
+    }
+
+    protected onDataEntityUpdate(
+        entity,
+        componentEnums ,
+        oldEntityData,
+        newEntityData
+    ) {
+        console.log(componentEnums, oldEntityData, newEntityData)
     }
 
 }

@@ -1,27 +1,29 @@
 import * as PIXI from "pixi.js";
-import {Events} from "../events/events";
-import {EventEnum} from "../events/event/event.enum";
-
-type TextureMap = {
-    [id in string]: PIXI.Texture
-};
+import {Events} from "../../events/events";
+import {EventEnum} from "../../events/event/event.enum";
+import {TextureEnum} from "./texture/texture.enum";
+import {TextureMapType} from "./texture/textureMap.type";
+import {SpriteSheetEnum} from "./spriteSheet/spriteSheet.enum";
 
 export class Textures {
 
-    private textureMap: TextureMap;
+    private textureMap: TextureMapType;
     public isLoad: boolean;
 
     constructor() {
-        this.textureMap = {};
+        this.textureMap = {} as TextureMapType;
         Events.on(EventEnum.UPDATE, this.update);
 
         PIXI.utils.clearTextureCache();
 
         // individual texture list
-        this.addTexture('logo');
+        Object.keys(TextureEnum)
+            .filter(textureKey => textureKey.indexOf('_') !== 0)
+            .map(textureKey => this.addTexture(TextureEnum[textureKey]));
 
         // sprite sheet list
-        this.addSpriteSheet('entities');
+        Object.values(SpriteSheetEnum)
+            .map(this.addSpriteSheet);
     }
 
     update = (delta: number) => {
@@ -34,21 +36,25 @@ export class Textures {
         Events.emit(EventEnum.TEXTURES_LOAD);
     }
 
-    get = (name: string): PIXI.Texture => {
+    get = (name: TextureEnum): PIXI.Texture => {
         if(!this.textureMap[name])
             this.textureMap[name] = new PIXI.Texture(PIXI.Texture.WHITE.baseTexture);
         return this.textureMap[name];
     }
 
     private addTexture = (name: string) => {
-        this._addTexture(name, this._getTexture(require(`assets/${name}.png`)))
+        try {
+            this._addTexture(name, this._getTexture(require(`assets/${name}.png`)));
+        } catch (e) {
+            console.warn(`texture '${name}' not found, ignoring...`)
+        }
     }
 
     private addSpriteSheet = (name: string) => {
         new PIXI.Spritesheet(
             this._getTexture(require(`assets/sprites/${name}/${name}.png`)),
             require(`assets/sprites/${name}/${name}.json`)
-        ).parse((_spriteSheet: TextureMap) => {
+        ).parse((_spriteSheet: TextureMapType) => {
             Object.entries(_spriteSheet)
                 .map(([id, texture]) => this._addTexture(id, texture));
         });
@@ -59,7 +65,7 @@ export class Textures {
     }
 
     private _addTexture = (id: string, texture: PIXI.Texture) => {
-        const _texture = this.get(id);
+        const _texture = this.get(id as TextureEnum);
         _texture.valid = false;
         _texture.baseTexture.resolution = 16
         _texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST

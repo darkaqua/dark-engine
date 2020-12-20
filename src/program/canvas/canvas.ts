@@ -6,7 +6,7 @@ import {Program} from "../program";
 import {Cursor} from "./cursor";
 import {Camera} from "./camera";
 import {ScreenEnum} from "./screens/screen/screen.enum";
-import {Textures} from "./textures";
+import {Textures} from "./textures/textures";
 import {Events} from "../events/events";
 import {EventEnum} from "../events/event/event.enum";
 import {getScreens} from "./screens/screens";

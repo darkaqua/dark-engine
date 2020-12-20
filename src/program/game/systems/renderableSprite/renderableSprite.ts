@@ -6,6 +6,7 @@ import {EntityAbstract} from "../../entities/entity/entity.abstract";
 import {Program} from "../../../program";
 import {TagInterface} from "../../components/tag/tag.interface";
 import {SpriteInterface} from "../../components/sprite/sprite.interface";
+import {TextureEnum} from "../../../canvas/textures/texture/texture.enum";
 
 export class RenderableSprite extends SystemAbstract {
 
@@ -25,7 +26,7 @@ export class RenderableSprite extends SystemAbstract {
 
         if(!sprite.visible) return;
 
-        const spriteEntity = new PIXI.Sprite(Program.getInstance().canvas.textures.get(sprite.texture));
+        const spriteEntity = new PIXI.Sprite(Program.getInstance().canvas.textures.get(sprite.texture as TextureEnum));
         spriteEntity.name = entity.id;
         spriteEntity.position.set(position.x, position.y);
         spriteEntity.interactive = true;
@@ -58,6 +59,15 @@ export class RenderableSprite extends SystemAbstract {
         if(!spriteEntity || sprite.visible) return;
 
         canvas.stage.removeChild(spriteEntity);
+    }
+
+    protected onDataEntityUpdate(
+        entity,
+        componentEnums ,
+        oldEntityData,
+        newEntityData
+    ) {
+
     }
 
 }

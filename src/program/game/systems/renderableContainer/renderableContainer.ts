@@ -50,4 +50,13 @@ export class RenderableContainer extends SystemAbstract {
         canvas.stage.removeChild(containerEntity);
     }
 
+    protected onDataEntityUpdate(
+        entity,
+        componentEnums ,
+        oldEntityData,
+        newEntityData
+    ) {
+
+    }
+
 }

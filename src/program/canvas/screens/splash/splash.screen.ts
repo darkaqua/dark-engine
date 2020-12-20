@@ -3,6 +3,7 @@ import {ScreenAbstract} from "../screen/screen.abstract";
 import {BackgroundGUI} from "../../gui/background/background.gui";
 import {ScreenEnum} from "../screen/screen.enum";
 import {Program} from "../../../program";
+import {TextureEnum} from "../../textures/texture/texture.enum";
 
 export class SplashScreen extends ScreenAbstract {
 
@@ -16,7 +17,7 @@ export class SplashScreen extends ScreenAbstract {
         }));
         poweredText.position.set(-20, -15);
 
-        const logo = new PIXI.Sprite(Program.getInstance().canvas.textures.get('logo'));
+        const logo = new PIXI.Sprite(Program.getInstance().canvas.textures.get(TextureEnum.LOGO));
         logo.pivot.x = logo.texture.orig.width / 2;
 
         this.addChild(poweredText, logo)

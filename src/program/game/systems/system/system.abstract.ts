@@ -2,6 +2,7 @@ import {ComponentEnum} from "../../components/component/component.enum";
 import {getComponentEntities} from "../../../store/components";
 import {Program} from "../../../program";
 import {EntityAbstract} from "../../entities/entity/entity.abstract";
+import {ComponentTypes} from "../../components/component/component.types";
 
 export abstract class SystemAbstract {
 
@@ -18,6 +19,9 @@ export abstract class SystemAbstract {
 
     protected abstract initEntity(entity: EntityAbstract);
     protected abstract updateEntity(delta: number, entity: EntityAbstract);
+    protected abstract onDataEntityUpdate(entity: EntityAbstract, componentEnums: ComponentEnum[],
+                                          oldEntityData: ComponentTypes, newEntityData: ComponentTypes);
+
 
     public update(delta: number) {
         const entityList = this.getEntities();
@@ -32,8 +36,27 @@ export abstract class SystemAbstract {
         this.lastUpdateEntityIdList = this.getEntityIdList();
     }
 
+    public onEntityDataUpdate(entityId: string, entityData: ComponentTypes) {
+        const entity = this.getEntity(entityId);
+        if(!entity) return;
+        const entityOldData = entity.getData();
+        const componentEnums = Object.keys(entityData) as ComponentEnum[];
+        const filteredEntityOldData = Object.keys(entityOldData)
+            // Filters only the updated data.
+            .filter(key => Object.keys(entityData).includes(key))
+            .reduce((a, b, c) => ({
+                ...a,
+                [b]: entityOldData[b]
+            }), {} as ComponentTypes)
+        this.onDataEntityUpdate(entity, componentEnums, filteredEntityOldData, entityData);
+    }
+
     public getEntityIdList(): string[] {
         return this.components.map(getComponentEntities).flat(2);
+    }
+
+    public getEntity(id: string): EntityAbstract | undefined {
+        return this.getEntities().find(entity => entity?.id === id);
     }
 
     public getEntities(): EntityAbstract[] {

@@ -54,4 +54,13 @@ export class Movement extends SystemAbstract {
         entity.updateData<PositionInterface>({ [ComponentEnum.POSITION]: position });
     }
 
+    protected onDataEntityUpdate(
+        entity,
+        componentEnums ,
+        oldEntityData,
+        newEntityData
+    ) {
+
+    }
+
 }
