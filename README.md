@@ -1,7 +1,13 @@
-# node with typescript
+# DarkEngine
+## 2d Game Framework for Web
 
-## How to:
-1. Use as template
-2. Get lost and search on stackoverflow
-3. Forget you forked this project
-4. Repeat and use as template.
+Implemented using [ECS](https://en.wikipedia.org/wiki/Entity_component_system) pattern.
+
+### Libraries
+- [pixi.js](https://github.com/pixijs/pixi.js)
+- [redux](https://github.com/reduxjs/redux)
+- [redux-saga](https://github.com/redux-saga/redux-saga)
+- [webpack](https://github.com/webpack/webpack)
+
+### Demos
+- [ThisIsNotAPirateGame](https://github.com/pagoru/ThisIsNotAPirateGame)
