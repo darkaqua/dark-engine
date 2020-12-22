@@ -8,7 +8,6 @@ import {getEntity} from "../../../store/entities";
 import {addEntityDispatchAction, updateEntityDispatchAction} from "../../../store/entities/dispatchers";
 import {v4} from "uuid";
 import {Program} from "../../../program";
-import {AddComponentInterface} from "../../components/component/component.types.map";
 import {EntityEnum} from "./entity.enum";
 
 const getStore = () => Program.getInstance().store;
@@ -34,7 +33,7 @@ export abstract class EntityAbstract {
         getStore().dispatch(updateEntityDispatchAction<TData>(this.id, data))
     }
 
-    addComponent: AddComponentInterface = (componentEnum, componentData) => {
+    addComponent(componentEnum: ComponentEnum, componentData: ComponentTypes) {
         getStore().dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
     }
 
