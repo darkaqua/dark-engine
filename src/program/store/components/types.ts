@@ -33,14 +33,11 @@ export type ComponentsActions =
     | IRemoveEntityComponentActionSuccess
 
 /** Default State Values **/
-export const componentsDefaultState = (): ComponentsState => ({
-    [ComponentEnum.POSITION]:               { entities: [] },
-    [ComponentEnum.SPRITE]:                 { entities: [] },
-    [ComponentEnum.CONTAINER]:              { entities: [] },
-    [ComponentEnum.TARGET_DIRECTION]:       { entities: [] },
-    [ComponentEnum.TAG]:                    { entities: [] },
-    [ComponentEnum.FOLLOW_CAMERA]:          { entities: [] },
-});
+export const componentsDefaultState = (): ComponentsState =>
+    Object.keys(ComponentEnum).reduce((a, b, c) => ({
+        ...a,
+        [b]: {  entities: [] }
+    }), {}) as ComponentsState
 
 /** State **/
 export type ComponentsState = {
