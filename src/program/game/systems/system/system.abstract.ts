@@ -19,8 +19,12 @@ export abstract class SystemAbstract {
 
     protected abstract initEntity(entity: EntityAbstract);
     protected abstract updateEntity(delta: number, entity: EntityAbstract);
-    protected abstract onDataEntityUpdate(entity: EntityAbstract, componentEnums: ComponentEnum[],
-                                          oldEntityData: ComponentTypes, newEntityData: ComponentTypes);
+    protected abstract onDataEntityUpdate(
+        entity: EntityAbstract,
+        componentEnums: ComponentEnum[],
+        oldEntityData: ComponentTypes,
+        newEntityData: ComponentTypes
+    );
 
 
     public update(delta: number) {

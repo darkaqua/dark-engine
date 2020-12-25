@@ -50,11 +50,18 @@ export class RenderableSprite extends SystemAbstract {
 
     updateEntity(delta: number, entity: EntityAbstract) {
         const {
-            [ComponentEnum.SPRITE]: sprite
-        } = entity.getData<SpriteInterface>();
+            [ComponentEnum.SPRITE]: sprite,
+            [ComponentEnum.POSITION]: position
+        } = entity.getData<SpriteInterface & PositionInterface>();
         const canvas = Program.getInstance().canvas;
 
         const spriteEntity = canvas.stage.getChildByName(entity.id);
+
+        if(spriteEntity && sprite.visible) {
+            const entityContainer = Program.getInstance().canvas.stage.getChildByName(entity.id);
+            if(entityContainer)
+                entityContainer.position.set(position.x, position.y);
+        }
 
         if(!spriteEntity || sprite.visible) return;
 

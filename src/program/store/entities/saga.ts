@@ -1,4 +1,4 @@
-import {all, put, takeEvery} from "@redux-saga/core/effects";
+import {all, put, takeEvery, takeLatest} from "@redux-saga/core/effects";
 import {EntitiesActions, EntitiesActionTypes} from "./types";
 import {IAddEntityAction, IRemoveEntityAction, IUpdateEntityAction} from "./actions";
 import {
@@ -12,7 +12,7 @@ import {Program} from "../../program";
 export function* entitiesSaga() {
     yield all([
         takeEvery(EntitiesActionTypes.ADD, add),
-        takeEvery(EntitiesActionTypes.UPDATE, update),
+        takeLatest(EntitiesActionTypes.UPDATE, update),
         takeEvery(EntitiesActionTypes.REMOVE, remove),
     ]);
 }

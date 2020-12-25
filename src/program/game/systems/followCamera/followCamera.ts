@@ -52,7 +52,7 @@ export class FollowCamera extends SystemAbstract {
         oldEntityData,
         newEntityData
     ) {
-        console.log(componentEnums, oldEntityData, newEntityData)
+
     }
 
 }
