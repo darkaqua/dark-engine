@@ -1,4 +1,4 @@
-import {all, put, takeEvery, takeLatest} from "@redux-saga/core/effects";
+import {all, put, takeEvery} from "@redux-saga/core/effects";
 import {EntitiesActions, EntitiesActionTypes} from "./types";
 import {IAddEntityAction, IRemoveEntityAction, IUpdateEntityAction} from "./actions";
 import {
@@ -7,12 +7,14 @@ import {
 } from "./dispatchers";
 import {ComponentEnum} from "../../game/components/component/component.enum";
 import {Program} from "../../program";
+import {addEntityComponentDispatchAction} from "../components/dispatchers";
+import {ComponentsActions} from "../components";
 
 /** Initial saga **/
 export function* entitiesSaga() {
     yield all([
         takeEvery(EntitiesActionTypes.ADD, add),
-        takeLatest(EntitiesActionTypes.UPDATE, update),
+        takeEvery(EntitiesActionTypes.UPDATE, update),
         takeEvery(EntitiesActionTypes.REMOVE, remove),
     ]);
 }
@@ -21,6 +23,10 @@ export function* entitiesSaga() {
 //
 function* add(action: IAddEntityAction<any>) {
     yield put<EntitiesActions>(addEntityDispatchActionSuccess(action.id, action.entityEnum, action.entityData));
+
+    yield Object.keys(action.entityData).map((componentEnum: ComponentEnum) =>
+        put<ComponentsActions>(addEntityComponentDispatchAction(componentEnum, action.id, action.entityData[componentEnum]))
+    );
 }
 
 function* update(action: IUpdateEntityAction<any>) {

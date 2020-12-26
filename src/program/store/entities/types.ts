@@ -38,8 +38,9 @@ export const entitiesDefaultState = (): EntitiesState => ({ });
 
 /** State **/
 export interface EntitiesState {
-    [id: string]: ComponentTypes & {
-        entityId: string;
-        entityEnum: EntityEnum;
-    }
+    [id: string]: BaseEntityType;
+}
+export type BaseEntityType = ComponentTypes & {
+    entityId: string;
+    entityEnum: EntityEnum;
 }

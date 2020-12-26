@@ -18,11 +18,13 @@ export abstract class EntityAbstract {
     public readonly entityEnum: EntityEnum;
 
     protected constructor(
-        entityEnum = EntityEnum.NONE
+        entityEnum = EntityEnum.NONE,
+        id: string = v4(),
+        entityData: any = {}
     ) {
-        this.id = v4();
+        this.id = id;
         this.entityEnum = entityEnum;
-        getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum));
+        getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum, entityData));
     }
 
     getData<TData extends ComponentTypes>() {
