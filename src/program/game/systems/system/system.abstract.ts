@@ -55,14 +55,20 @@ export abstract class SystemAbstract {
         if(!entity) return;
         const entityOldData = entity.getData();
         const componentEnums = Object.keys(entityData) as ComponentEnum[];
+
+        // Only update when componentEnum is inside system;
+        if(!componentEnums.some((componentEnum) => this.components.includes(componentEnum)))
+            return;
+
         const filteredEntityOldData = Object.keys(entityOldData)
             // Filters only the updated data.
-            .filter(key => Object.keys(entityData).includes(key))
+            .filter(key => componentEnums.includes(key as ComponentEnum))
             .filter(key => JSON.stringify(entityOldData[key]) !== JSON.stringify(entityData[key]))
             .reduce((a, b, c) => ({
                 ...a,
                 [b]: entityOldData[b]
-            }), {} as ComponentTypes)
+            }), {} as ComponentTypes);
+
         this.onDataEntityUpdate(entity, componentEnums, filteredEntityOldData, entityData);
     }
 
