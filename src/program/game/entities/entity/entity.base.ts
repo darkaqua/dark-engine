@@ -1,6 +1,7 @@
 import {EntityAbstract} from "./entity.abstract";
 import {BaseEntityType} from "../../../store/entities";
 import {ComponentEnum} from "../../components/component/component.enum";
+import {ComponentTypes} from "../../components/component/component.types";
 
 export class EntityBase extends EntityAbstract {
 
