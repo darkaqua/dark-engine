@@ -31,9 +31,11 @@ export abstract class SystemAbstract {
         const entityList = this.getEntities();
         // Update every entity
         entityList
+            .filter(e => e)
             .map(entity => this.updateEntity(delta, entity));
         // Init every new entity;
         entityList
+            .filter(e => e)
             .filter(entity => !this.lastUpdateEntityIdList.some(entityId => entity.id === entityId))
             .map(entity => this.initEntity(entity));
         // Update the entity list;
@@ -56,6 +58,7 @@ export abstract class SystemAbstract {
         const filteredEntityOldData = Object.keys(entityOldData)
             // Filters only the updated data.
             .filter(key => Object.keys(entityData).includes(key))
+            .filter(key => JSON.stringify(entityOldData[key]) !== JSON.stringify(entityData[key]))
             .reduce((a, b, c) => ({
                 ...a,
                 [b]: entityOldData[b]
