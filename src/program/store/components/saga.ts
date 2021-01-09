@@ -1,9 +1,9 @@
-import {all, put, takeEvery} from "@redux-saga/core/effects";
+import {all, put, takeEvery, takeLeading} from "@redux-saga/core/effects";
 import {ComponentsActions, ComponentsActionTypes} from "./types";
 import {IAddComponentAction, IAddEntityComponentAction} from "./actions";
 import {
     addComponentDispatchActionSuccess,
-    addEntityComponentDispatchActionSuccess,
+    addEntityComponentDispatchActionSuccess, clearAllEntityComponentDispatchActionSuccess,
     removeEntityComponentDispatchActionSuccess,
 } from "./dispatchers";
 import {EntitiesActions} from "../entities";
@@ -16,6 +16,7 @@ export function* componentsSaga() {
         takeEvery(ComponentsActionTypes.ADD, add),
         takeEvery(ComponentsActionTypes.ADD_ENTITY, addEntity),
         takeEvery(ComponentsActionTypes.REMOVE_ENTITY, removeEntity),
+        takeLeading(ComponentsActionTypes.CLEAR_ALL_ENTITIES, clearAllEntities),
     ]);
 }
 
@@ -38,4 +39,8 @@ function* addEntity(action: IAddEntityComponentAction<any>) {
 
 function* removeEntity(action: IAddEntityComponentAction<any>) {
     yield put<ComponentsActions>(removeEntityComponentDispatchActionSuccess(action.componentEnum, action.entityId));
+}
+
+function* clearAllEntities() {
+    yield put<ComponentsActions>(clearAllEntityComponentDispatchActionSuccess());
 }

@@ -26,6 +26,12 @@ export const entitiesReducer: Reducer<EntitiesState, EntitiesActions> = (
             return produce(state, (copyState: EntitiesState) => {
                 delete copyState[action.id];
             });
+        case EntitiesActionTypes.CLEAR_ALL_SUCCESS:
+            return produce(state, (copyState: EntitiesState) => {
+                Object.keys(copyState).map(key => {
+                    delete copyState[key];
+                });
+            });
     }
     return state
 }

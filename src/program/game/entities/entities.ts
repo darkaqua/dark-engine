@@ -25,6 +25,7 @@ export class Entities {
     }
 
     removeEntity(entityId: string): boolean {
+        if(!this.list.has(entityId)) return;
         Program.getInstance().store.dispatch(removeEntityDispatchAction(entityId));
         return this.list.delete(entityId);
     }

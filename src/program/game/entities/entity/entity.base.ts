@@ -1,22 +1,19 @@
 import {EntityAbstract} from "./entity.abstract";
 import {BaseEntityType} from "../../../store/entities";
+import {ComponentEnum} from "../../components/component/component.enum";
 
 export class EntityBase extends EntityAbstract {
-
-    private static EXCLUDED_KEYS_TO_ADD = ['_id', 'entityEnum', 'entityId'];
 
     constructor(
         baseEntityType: BaseEntityType
     ) {
         super(
             baseEntityType.entityEnum,
-            baseEntityType.entityId,
-            Object.keys(baseEntityType)
-                .filter(key => !EntityBase.EXCLUDED_KEYS_TO_ADD.includes(key))
-                .reduce((a, b, c) => ({
-                    ...a,
-                    [b]: baseEntityType[b]
-                }), {})
+            baseEntityType.entityId
         );
+
+        Object.keys(baseEntityType)
+            .filter(key => ComponentEnum[key])
+            .map((componentEnum: ComponentEnum) => this.addComponent(componentEnum, baseEntityType[componentEnum]))
     }
 }

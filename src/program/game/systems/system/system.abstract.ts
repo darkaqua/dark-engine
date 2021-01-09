@@ -25,6 +25,7 @@ export abstract class SystemAbstract {
         oldEntityData: ComponentTypes,
         newEntityData: ComponentTypes
     );
+    protected abstract deleteEntity(entity: EntityAbstract);
 
     public update(delta: number) {
         const entityList = this.getEntities();
@@ -41,6 +42,10 @@ export abstract class SystemAbstract {
 
     public stop() {
         this.lastUpdateEntityIdList = [];
+    }
+
+    public delete(entityId: string) {
+        this.deleteEntity(this.getEntity(entityId));
     }
 
     public onEntityDataUpdate(entityId: string, entityData: ComponentTypes) {
@@ -71,7 +76,8 @@ export abstract class SystemAbstract {
         const entityList = this.getEntityIdList();
         const entityCountMap = new Map([...new Set(entityList)].map(x => [x, entityList.filter(y => y === x).length] ));
         return [...new Set(entityList.filter(o => entityCountMap.get(o) === this.components.length))]
-            .map(entityId => program.game.entities.get(entityId));
+            .map(entityId => program.game.entities.get(entityId))
+            .filter(entity => entity);
     }
 
 }

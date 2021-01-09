@@ -59,4 +59,8 @@ export class RenderableContainer extends SystemAbstract {
 
     }
 
+    protected deleteEntity(entity: EntityAbstract) {
+
+    }
+
 }

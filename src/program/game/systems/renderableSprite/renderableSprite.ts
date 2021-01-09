@@ -77,4 +77,9 @@ export class RenderableSprite extends SystemAbstract {
 
     }
 
+    protected deleteEntity(entity: EntityAbstract) {
+        const { stage } = Program.getInstance().canvas;
+        stage.removeChild(stage.getChildByName(entity.id))
+    }
+
 }

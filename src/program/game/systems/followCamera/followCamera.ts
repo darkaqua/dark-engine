@@ -55,4 +55,8 @@ export class FollowCamera extends SystemAbstract {
 
     }
 
+    protected deleteEntity(entity: EntityAbstract) {
+        
+    }
+
 }

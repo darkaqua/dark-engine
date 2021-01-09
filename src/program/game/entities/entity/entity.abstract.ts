@@ -19,12 +19,11 @@ export abstract class EntityAbstract {
 
     protected constructor(
         entityEnum = EntityEnum.NONE,
-        id: string = v4(),
-        entityData: any = {}
+        id: string = v4()
     ) {
         this.id = id;
         this.entityEnum = entityEnum;
-        getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum, entityData));
+        getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum));
     }
 
     getData<TData extends ComponentTypes>() {

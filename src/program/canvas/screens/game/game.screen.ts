@@ -48,6 +48,10 @@ export class GameScreen extends ScreenAbstract {
             case 'ArrowDown':
                 camera.move({ x: 0, y: -30 });
                 break;
+            case 'd':
+                if(!key.isDown) return;
+                Program.getInstance().game.entities.removeEntity('BAD_GUY_ID');
+                break;
             case '+':
                 if(!key.isDown) return;
                 camera.scale++;

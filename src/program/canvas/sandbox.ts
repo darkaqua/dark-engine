@@ -15,12 +15,10 @@ export class Sandbox {
         const badGuy = new BadGuy({ x: 20, y: 0 });
 
         Program.getInstance().game.entities.addEntity(pagoruPlayer, badGuy);
-
-
     }
 
     static update = (delta: number) => {
-
+        console.log(Program.getInstance().store.getState().components.SPRITE.entities)
     }
 
 }

@@ -7,7 +7,10 @@ import {
 } from "./dispatchers";
 import {ComponentEnum} from "../../game/components/component/component.enum";
 import {Program} from "../../program";
-import {addEntityComponentDispatchAction, clearAllEntityComponentDispatchAction} from "../components/dispatchers";
+import {
+    clearAllEntityComponentDispatchAction,
+    removeEntityComponentDispatchAction
+} from "../components/dispatchers";
 import {ComponentsActions} from "../components";
 
 /** Initial saga **/
@@ -24,21 +27,29 @@ export function* entitiesSaga() {
 //
 function* add(action: IAddEntityAction<any>) {
     yield put<EntitiesActions>(addEntityDispatchActionSuccess(action.id, action.entityEnum, action.entityData));
-
-    yield Object.keys(action.entityData).map((componentEnum: ComponentEnum) =>
-        put<ComponentsActions>(addEntityComponentDispatchAction(componentEnum, action.id, action.entityData[componentEnum]))
-    );
 }
 
 function* update(action: IUpdateEntityAction<any>) {
     Program.getInstance().game.systems
-        .getSystemsByComponents(Object.keys(action.entityData) as ComponentEnum[])
+        .getSystemsByEntityId(action.id)
         .map(system => system.onEntityDataUpdate(action.id, action.entityData));
 
     yield put<EntitiesActions>(updateEntityDispatchActionSuccess(action.id, action.entityData));
 }
 
 function* remove(action: IRemoveEntityAction) {
+    const entityData = Program.getInstance().game.entities.get(action.id).getData();
+
+    yield all(
+        Object.keys(entityData)
+            .filter(key => ComponentEnum[key])
+            .map((componentEnum: ComponentEnum) => put<ComponentsActions>(removeEntityComponentDispatchAction(componentEnum, action.id)))
+    );
+
+    Program.getInstance().game.systems
+        .getSystemsByEntityId(action.id)
+        .forEach(system => system.delete(action.id));
+
     yield put<EntitiesActions>(removeEntityDispatchActionSuccess(action.id));
 }
 

@@ -7,7 +7,6 @@ import {EventEnum} from "../../events/event/event.enum";
 import {Program} from "../../program";
 import {ScreenEnum} from "../../canvas/screens/screen/screen.enum";
 import {FollowCamera} from "./followCamera/followCamera";
-import {ComponentEnum} from "../components/component/component.enum";
 
 export class Systems {
 
@@ -36,10 +35,9 @@ export class Systems {
         this.list.forEach(system => system.update(delta));
     }
 
-    getSystemsByComponents(componentList: ComponentEnum[]): SystemAbstract[] {
-        return Program.getInstance().game.systems.list.filter(system =>
-            system.components.some(component => componentList.includes(component))
-        );
+    getSystemsByEntityId(entityId: string): SystemAbstract[] {
+        return Program.getInstance().game.systems.list
+            .filter(system => system.getEntity(entityId));
     }
 
 }

@@ -54,4 +54,8 @@ export class Movement extends SystemAbstract {
 
     }
 
+    protected deleteEntity(entity: EntityAbstract) {
+
+    }
+
 }
