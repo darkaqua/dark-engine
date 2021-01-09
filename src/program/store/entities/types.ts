@@ -1,7 +1,7 @@
 
 import {
     IAddEntityAction,
-    IAddEntityActionSuccess,
+    IAddEntityActionSuccess, IClearAllEntityAction, IClearAllEntityActionSuccess,
     IRemoveEntityAction,
     IRemoveEntityActionSuccess,
     IUpdateEntityAction,
@@ -20,6 +20,9 @@ export enum EntitiesActionTypes {
 
     REMOVE = 'ENTITIES@@REMOVE',
     REMOVE_SUCCESS = 'ENTITIES@@REMOVE_SUCCESS',
+
+    CLEAR_ALL = 'ENTITIES@@CLEAR_ALL',
+    CLEAR_ALL_SUCCESS = 'ENTITIES@@CLEAR_ALL_SUCCESS',
 }
 
 /** Action List **/
@@ -32,6 +35,9 @@ export type EntitiesActions =
 
     | IRemoveEntityAction
     | IRemoveEntityActionSuccess
+
+    | IClearAllEntityAction
+    | IClearAllEntityActionSuccess
 
 /** Default State Values **/
 export const entitiesDefaultState = (): EntitiesState => ({ });

@@ -2,7 +2,11 @@
 import {EntitiesActionTypes} from "./types";
 import {
     IAddEntityAction,
-    IAddEntityActionSuccess, IRemoveEntityAction, IRemoveEntityActionSuccess,
+    IAddEntityActionSuccess,
+    IClearAllEntityAction,
+    IClearAllEntityActionSuccess,
+    IRemoveEntityAction,
+    IRemoveEntityActionSuccess,
     IUpdateEntityAction,
     IUpdateEntityActionSuccess
 } from "./actions";
@@ -33,6 +37,10 @@ export const removeEntityDispatchAction = (
     type: EntitiesActionTypes.REMOVE,
     id
 });
+export const clearAllEntityDispatchAction = (
+): IClearAllEntityAction => ({
+    type: EntitiesActionTypes.CLEAR_ALL
+});
 
 /** Saga Actions **/
 export const addEntityDispatchActionSuccess = <TEntityData>(
@@ -58,5 +66,9 @@ export const removeEntityDispatchActionSuccess = (
 ): IRemoveEntityActionSuccess => ({
     type: EntitiesActionTypes.REMOVE_SUCCESS,
     id
+});
+export const clearAllEntityDispatchActionSuccess = (
+): IClearAllEntityActionSuccess => ({
+    type: EntitiesActionTypes.CLEAR_ALL_SUCCESS
 });
 

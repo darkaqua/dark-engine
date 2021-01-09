@@ -18,6 +18,9 @@ export interface IRemoveEntityComponentAction {
     componentEnum: ComponentEnum;
     entityId: string;
 }
+export interface IClearAllEntitiesComponentAction {
+    type: typeof ComponentsActionTypes.CLEAR_ALL_ENTITIES;
+}
 
 /** Actions **/
 export interface IAddComponentActionSuccess {
@@ -33,5 +36,8 @@ export interface IRemoveEntityComponentActionSuccess {
     type: typeof ComponentsActionTypes.REMOVE_ENTITY_SUCCESS;
     componentEnum: ComponentEnum;
     entityId: string;
+}
+export interface IClearAllEntitiesComponentActionSuccess {
+    type: typeof ComponentsActionTypes.CLEAR_ALL_ENTITIES_SUCCESS;
 }
 

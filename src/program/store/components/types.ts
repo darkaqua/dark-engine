@@ -2,7 +2,7 @@
 import {
     IAddComponentAction, IAddComponentActionSuccess,
     IAddEntityComponentAction,
-    IAddEntityComponentActionSuccess,
+    IAddEntityComponentActionSuccess, IClearAllEntitiesComponentAction, IClearAllEntitiesComponentActionSuccess,
     IRemoveEntityComponentAction,
     IRemoveEntityComponentActionSuccess
 } from "./actions";
@@ -18,7 +18,10 @@ export enum ComponentsActionTypes {
     ADD_ENTITY_SUCCESS = 'COMPONENTS@@ADD_ENTITY_SUCCESS',
 
     REMOVE_ENTITY = 'COMPONENTS@@REMOVE_ENTITY',
-    REMOVE_ENTITY_SUCCESS = 'COMPONENTS@@REMOVE_ENTITY_SUCCESS'
+    REMOVE_ENTITY_SUCCESS = 'COMPONENTS@@REMOVE_ENTITY_SUCCESS',
+
+    CLEAR_ALL_ENTITIES = 'COMPONENTS@@CLEAR_ALL_ENTITIES',
+    CLEAR_ALL_ENTITIES_SUCCESS = 'COMPONENTS@@CLEAR_ALL_ENTITIES_SUCCESS'
 }
 
 /** Action List **/
@@ -31,6 +34,9 @@ export type ComponentsActions =
 
     | IRemoveEntityComponentAction
     | IRemoveEntityComponentActionSuccess
+
+    | IClearAllEntitiesComponentAction
+    | IClearAllEntitiesComponentActionSuccess
 
 /** Default State Values **/
 export const componentsDefaultState = (): ComponentsState =>

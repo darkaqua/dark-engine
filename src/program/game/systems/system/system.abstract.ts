@@ -26,7 +26,6 @@ export abstract class SystemAbstract {
         newEntityData: ComponentTypes
     );
 
-
     public update(delta: number) {
         const entityList = this.getEntities();
         // Update every entity
@@ -38,6 +37,10 @@ export abstract class SystemAbstract {
             .map(entity => this.initEntity(entity));
         // Update the entity list;
         this.lastUpdateEntityIdList = this.getEntityIdList();
+    }
+
+    public stop() {
+        this.lastUpdateEntityIdList = [];
     }
 
     public onEntityDataUpdate(entityId: string, entityData: ComponentTypes) {

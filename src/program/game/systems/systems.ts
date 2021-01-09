@@ -27,9 +27,13 @@ export class Systems {
         return this.systems;
     }
 
+    stopAll() {
+        this.list.forEach(system => system.stop());
+    }
+
     update = (delta: number) => {
         if(Program.getInstance().canvas.getSelectedScreenEnum() !== ScreenEnum.GAME) return;
-        this.list.map(system => system.update(delta));
+        this.list.forEach(system => system.update(delta));
     }
 
     getSystemsByComponents(componentList: ComponentEnum[]): SystemAbstract[] {

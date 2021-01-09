@@ -3,7 +3,7 @@ import {ComponentsActionTypes} from "./types";
 import {
     IAddComponentAction, IAddComponentActionSuccess,
     IAddEntityComponentAction,
-    IAddEntityComponentActionSuccess,
+    IAddEntityComponentActionSuccess, IClearAllEntitiesComponentAction, IClearAllEntitiesComponentActionSuccess,
     IRemoveEntityComponentAction,
     IRemoveEntityComponentActionSuccess
 } from "./actions";
@@ -34,6 +34,10 @@ export const removeEntityComponentDispatchAction = (
     componentEnum,
     entityId
 });
+export const clearAllEntityComponentDispatchAction = (
+): IClearAllEntitiesComponentAction => ({
+    type: ComponentsActionTypes.CLEAR_ALL_ENTITIES
+});
 
 /** Saga Actions **/
 export const addComponentDispatchActionSuccess = (
@@ -58,3 +62,8 @@ export const removeEntityComponentDispatchActionSuccess = (
     componentEnum,
     entityId
 });
+export const clearAllEntityComponentDispatchActionSuccess = (
+): IClearAllEntitiesComponentActionSuccess => ({
+    type: ComponentsActionTypes.CLEAR_ALL_ENTITIES_SUCCESS
+});
+

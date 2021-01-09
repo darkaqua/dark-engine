@@ -18,6 +18,9 @@ export interface IRemoveEntityAction {
     type: typeof EntitiesActionTypes.REMOVE
     id: string;
 }
+export interface IClearAllEntityAction {
+    type: typeof EntitiesActionTypes.CLEAR_ALL
+}
 
 /** Actions **/
 export interface IAddEntityActionSuccess<TEntityData> {
@@ -34,5 +37,8 @@ export interface IUpdateEntityActionSuccess<TEntityData> {
 export interface IRemoveEntityActionSuccess {
     type: typeof EntitiesActionTypes.REMOVE_SUCCESS
     id: string;
+}
+export interface IClearAllEntityActionSuccess {
+    type: typeof EntitiesActionTypes.CLEAR_ALL_SUCCESS
 }
 
