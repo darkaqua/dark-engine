@@ -31,14 +31,19 @@ export abstract class EntityAbstract {
             .filter(id => ComponentEnum[id]) as ComponentEnum[]
     }
 
-    getComponentData<TComponentType extends ComponentTypes>(
-        componentEnum: ComponentEnum
+    getComponentData<TComponentType extends ComponentTypes[]>(
+        ...componentEnum: ComponentEnum[]
     ): TComponentType {
-        return this.getRawData()[componentEnum];
+        const rawData = this.getRawData();
+        return componentEnum.map(_componentEnum => rawData[_componentEnum]) as TComponentType;
     }
 
     getRawData(): (ComponentTypes & BaseEntityType) {
         return getStore().getState().entities[this.id];
+    }
+
+    hasComponent(componentEnum: ComponentEnum): boolean {
+        return getStore().getState().components[componentEnum].entities.includes(this.id);
     }
 
     updateComponentData<TComponentType extends ComponentTypes>(

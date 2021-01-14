@@ -38,6 +38,8 @@ function* update(action: IUpdateEntityAction<any>) {
 }
 
 function* remove(action: IRemoveEntityAction) {
+    const { game } = Program.getInstance();
+
     const componentEnums = Program.getInstance().game.entities.get(action.id).getComponents()
 
     yield all(
@@ -46,9 +48,11 @@ function* remove(action: IRemoveEntityAction) {
             .map((componentEnum: ComponentEnum) => put<ComponentsActions>(removeEntityComponentDispatchAction(componentEnum, action.id)))
     );
 
-    Program.getInstance().game.systems
+    yield game.systems
         .getSystemsByEntityId(action.id)
-        .forEach(system => system._remove(action.id));
+        .map(system => system._remove(action.id));
+
+    game.entities.list.delete(action.id);
 
     yield put<EntitiesActions>(removeEntityDispatchActionSuccess(action.id));
 }
