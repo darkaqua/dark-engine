@@ -18,11 +18,19 @@ export class RenderableSprite extends SystemAbstract {
     }
 
     onInitEntity(entity: EntityAbstract) {
-        const sprite = entity.getComponentData<SpriteInterface>(ComponentEnum.SPRITE);
-        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
-        const tag = entity.getComponentData<TagInterface>(ComponentEnum.TAG);
-
-        console.log(entity, sprite)
+        const [
+            sprite,
+            { position },
+            tag
+        ] = entity.getComponentData<[
+            SpriteInterface,
+            PositionInterface,
+            TagInterface
+        ]>(
+            ComponentEnum.SPRITE,
+            ComponentEnum.POSITION,
+            ComponentEnum.TAG
+        );
 
         if(!sprite.visible) return;
 
@@ -49,8 +57,17 @@ export class RenderableSprite extends SystemAbstract {
     }
 
     onUpdateEntity(delta: number, entity: EntityAbstract) {
-        const sprite = entity.getComponentData<SpriteInterface>(ComponentEnum.SPRITE);
-        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
+        const [
+            sprite,
+            { position }
+        ] = entity.getComponentData<[
+            SpriteInterface,
+            PositionInterface,
+            TagInterface
+        ]>(
+            ComponentEnum.SPRITE,
+            ComponentEnum.POSITION
+        );
 
         const canvas = Program.getInstance().canvas;
 

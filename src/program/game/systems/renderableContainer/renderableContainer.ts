@@ -16,8 +16,16 @@ export class RenderableContainer extends SystemAbstract {
     }
 
     onInitEntity(entity: EntityAbstract) {
-        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
-        const container = entity.getComponentData<ContainerInterface>(ComponentEnum.CONTAINER);
+        const [
+            { position },
+            container
+        ] = entity.getComponentData<[
+            PositionInterface,
+            ContainerInterface
+        ]>(
+            ComponentEnum.POSITION,
+            ComponentEnum.CONTAINER
+        );
 
         if(!container.visible) return;
 
@@ -35,7 +43,7 @@ export class RenderableContainer extends SystemAbstract {
     }
 
     onUpdateEntity(delta: number, entity: EntityAbstract) {
-        const container = entity.getComponentData<ContainerInterface>(ComponentEnum.CONTAINER);
+        const [container] = entity.getComponentData<[ContainerInterface]>(ComponentEnum.CONTAINER);
 
         const canvas = Program.getInstance().canvas;
 

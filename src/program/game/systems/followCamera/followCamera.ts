@@ -17,9 +17,19 @@ export class FollowCamera extends SystemAbstract {
     }
 
     onUpdateEntity(delta: number, entity: EntityAbstract) {
-        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
-        const sprite = entity.getComponentData<SpriteInterface>(ComponentEnum.SPRITE);
-        const followCamera = entity.getComponentData<FollowCameraInterface>(ComponentEnum.FOLLOW_CAMERA);
+        const [
+            { position },
+            sprite,
+            followCamera
+        ] = entity.getComponentData<[
+            PositionInterface,
+            SpriteInterface,
+            FollowCameraInterface
+        ]>(
+            ComponentEnum.POSITION,
+            ComponentEnum.SPRITE,
+            ComponentEnum.FOLLOW_CAMERA
+        );
 
         if(!followCamera.follow || !sprite || !sprite.visible) return;
 
@@ -36,7 +46,10 @@ export class FollowCamera extends SystemAbstract {
             y: cameraPosition.y
         }
 
-        entity.updateComponentData<PositionInterface>(ComponentEnum.POSITION, { position: targetPosition })
+        entity.updateComponentData<[PositionInterface]>(
+            [ComponentEnum.POSITION],
+            [{ position: targetPosition }]
+        );
     }
 
 }

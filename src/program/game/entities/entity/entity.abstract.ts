@@ -46,14 +46,17 @@ export abstract class EntityAbstract {
         return getStore().getState().components[componentEnum].entities.includes(this.id);
     }
 
-    updateComponentData<TComponentType extends ComponentTypes>(
-        componentEnum: ComponentEnum,
+    updateComponentData<TComponentType extends ComponentTypes[]>(
+        componentEnum: ComponentEnum[],
         componentData: TComponentType
     ) {
         getStore().dispatch(updateEntityDispatchAction(
             this.id,
-            { [componentEnum]: componentData })
-        );
+            componentEnum.reduce((obj, _componentEnum, index) => ({
+                ...obj,
+                [_componentEnum]: componentData[index]
+            }), {})
+        ));
     }
 
     addComponent(

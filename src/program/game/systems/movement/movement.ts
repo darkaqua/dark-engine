@@ -15,8 +15,10 @@ export class Movement extends SystemAbstract {
     }
 
     onUpdateEntity(delta: number, entity: EntityAbstract) {
-        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
-        const targetDirection = entity.getComponentData<TargetDirectionInterface>(ComponentEnum.TARGET_DIRECTION);
+        const [
+            { position },
+            targetDirection
+        ] = entity.getComponentData<[PositionInterface, TargetDirectionInterface]>(ComponentEnum.POSITION, ComponentEnum.TARGET_DIRECTION);
 
         switch (targetDirection.direction) {
             // case TargetDirectionEnum.NONE:
@@ -35,7 +37,10 @@ export class Movement extends SystemAbstract {
                 break;
         }
 
-        entity.updateComponentData<PositionInterface>(ComponentEnum.POSITION, { position });
+        entity.updateComponentData<[PositionInterface]>(
+            [ComponentEnum.POSITION],
+            [{ position }]
+        );
     }
 
 }
