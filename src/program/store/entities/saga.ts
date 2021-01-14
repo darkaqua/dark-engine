@@ -32,23 +32,23 @@ function* add(action: IAddEntityAction<any>) {
 function* update(action: IUpdateEntityAction<any>) {
     Program.getInstance().game.systems
         .getSystemsByEntityId(action.id)
-        .map(system => system.onEntityDataUpdate(action.id, action.entityData));
+        .map(system => system._updateEntityData(action.id, action.entityData));
 
     yield put<EntitiesActions>(updateEntityDispatchActionSuccess(action.id, action.entityData));
 }
 
 function* remove(action: IRemoveEntityAction) {
-    const entityData = Program.getInstance().game.entities.get(action.id).getData();
+    const componentEnums = Program.getInstance().game.entities.get(action.id).getComponents()
 
     yield all(
-        Object.keys(entityData)
+        componentEnums
             .filter(key => ComponentEnum[key])
             .map((componentEnum: ComponentEnum) => put<ComponentsActions>(removeEntityComponentDispatchAction(componentEnum, action.id)))
     );
 
     Program.getInstance().game.systems
         .getSystemsByEntityId(action.id)
-        .forEach(system => system.delete(action.id));
+        .forEach(system => system._remove(action.id));
 
     yield put<EntitiesActions>(removeEntityDispatchActionSuccess(action.id));
 }

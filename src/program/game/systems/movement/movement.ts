@@ -4,7 +4,6 @@ import {PositionInterface} from "../../components/position/position.interface";
 import {EntityAbstract} from "../../entities/entity/entity.abstract";
 import {TargetDirectionInterface} from "../../components/targetDirection/targetDirection.interface";
 import {TargetDirectionEnum} from "../../components/targetDirection/targetDirection.enum";
-import {SpriteInterface} from "../../components/sprite/sprite.interface";
 
 export class Movement extends SystemAbstract {
 
@@ -15,15 +14,9 @@ export class Movement extends SystemAbstract {
         ]);
     }
 
-    initEntity(entity: EntityAbstract) {
-
-    }
-
-    updateEntity(delta: number, entity: EntityAbstract) {
-        const {
-            [ComponentEnum.POSITION]: position,
-            [ComponentEnum.TARGET_DIRECTION]: targetDirection
-        } = entity.getData<PositionInterface & TargetDirectionInterface & SpriteInterface>()
+    onUpdateEntity(delta: number, entity: EntityAbstract) {
+        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
+        const targetDirection = entity.getComponentData<TargetDirectionInterface>(ComponentEnum.TARGET_DIRECTION);
 
         switch (targetDirection.direction) {
             // case TargetDirectionEnum.NONE:
@@ -42,20 +35,7 @@ export class Movement extends SystemAbstract {
                 break;
         }
 
-        entity.updateData<PositionInterface>({ [ComponentEnum.POSITION]: position });
-    }
-
-    protected onDataEntityUpdate(
-        entity,
-        componentEnums ,
-        oldEntityData,
-        newEntityData
-    ) {
-
-    }
-
-    protected deleteEntity(entity: EntityAbstract) {
-
+        entity.updateComponentData<PositionInterface>(ComponentEnum.POSITION, { position });
     }
 
 }

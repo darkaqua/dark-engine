@@ -50,7 +50,7 @@ export class GameScreen extends ScreenAbstract {
                 break;
             case 'd':
                 if(!key.isDown) return;
-                Program.getInstance().game.entities.removeEntity('BAD_GUY_ID');
+                Program.getInstance().game.entities.remove('BAD_GUY_ID');
                 break;
             case '+':
                 if(!key.isDown) return;

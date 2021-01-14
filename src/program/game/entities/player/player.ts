@@ -12,11 +12,11 @@ export class Player extends EntityAbstract {
         direction: TargetDirectionEnum
     ) {
         super(EntityEnum.PLAYER);
-        this.addComponent(ComponentEnum.TARGET_DIRECTION, { [ComponentEnum.TARGET_DIRECTION]: { direction } } );
-        this.addComponent(ComponentEnum.POSITION, { [ComponentEnum.POSITION]: position } );
-        this.addComponent(ComponentEnum.TAG, { [ComponentEnum.TAG]: { username } });
-        this.addComponent(ComponentEnum.SPRITE, { [ComponentEnum.SPRITE]: { visible: true, texture: 'player' } });
-        this.addComponent(ComponentEnum.FOLLOW_CAMERA, { [ComponentEnum.FOLLOW_CAMERA]: { follow: true } });
+        this.addComponent(ComponentEnum.TARGET_DIRECTION, { direction } );
+        this.addComponent(ComponentEnum.POSITION, { position } );
+        this.addComponent(ComponentEnum.TAG, { username });
+        this.addComponent(ComponentEnum.SPRITE, { visible: true, texture: 'player' });
+        this.addComponent(ComponentEnum.FOLLOW_CAMERA, { follow: true });
     }
 
 }

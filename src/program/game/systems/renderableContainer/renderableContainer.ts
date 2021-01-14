@@ -5,7 +5,6 @@ import {PositionInterface} from "../../components/position/position.interface";
 import {EntityAbstract} from "../../entities/entity/entity.abstract";
 import {ContainerInterface} from "../../components/container/container.interface";
 import {Program} from "../../../program";
-import {TagInterface} from "../../components/tag/tag.interface";
 
 export class RenderableContainer extends SystemAbstract {
 
@@ -16,11 +15,9 @@ export class RenderableContainer extends SystemAbstract {
         ]);
     }
 
-    initEntity(entity: EntityAbstract) {
-        const {
-            [ComponentEnum.POSITION]: position,
-            [ComponentEnum.CONTAINER]: container
-        } = entity.getData<PositionInterface & ContainerInterface & TagInterface>();
+    onInitEntity(entity: EntityAbstract) {
+        const { position } = entity.getComponentData<PositionInterface>(ComponentEnum.POSITION);
+        const container = entity.getComponentData<ContainerInterface>(ComponentEnum.CONTAINER);
 
         if(!container.visible) return;
 
@@ -37,10 +34,9 @@ export class RenderableContainer extends SystemAbstract {
         Program.getInstance().canvas.stage.addChild(entityContainer);
     }
 
-    updateEntity(delta: number, entity: EntityAbstract) {
-        const {
-            [ComponentEnum.CONTAINER]: container
-        } = entity.getData<ContainerInterface>();
+    onUpdateEntity(delta: number, entity: EntityAbstract) {
+        const container = entity.getComponentData<ContainerInterface>(ComponentEnum.CONTAINER);
+
         const canvas = Program.getInstance().canvas;
 
         const containerEntity = canvas.stage.getChildByName(entity.id);
@@ -48,19 +44,6 @@ export class RenderableContainer extends SystemAbstract {
         if(!containerEntity || container.visible) return;
 
         canvas.stage.removeChild(containerEntity);
-    }
-
-    protected onDataEntityUpdate(
-        entity,
-        componentEnums ,
-        oldEntityData,
-        newEntityData
-    ) {
-
-    }
-
-    protected deleteEntity(entity: EntityAbstract) {
-
     }
 
 }

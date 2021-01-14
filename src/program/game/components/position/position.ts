@@ -8,7 +8,7 @@ export class Position extends ComponentAbstract<PositionInterface> {
         super(
             ComponentEnum.POSITION,
             {
-                [ComponentEnum.POSITION]: {
+                position: {
                     x: 0,
                     y: 0
                 }

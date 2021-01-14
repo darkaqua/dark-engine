@@ -19,12 +19,12 @@ export class Entities {
         return this.list.get(entityId) as TEntity;
     }
 
-    addEntity(...entities: EntityTypes[]) {
+    add(...entities: EntityTypes[]) {
         entities.map(entity => this.list.set(entity.id, entity))
         return this;
     }
 
-    removeEntity(entityId: string): boolean {
+    remove(entityId: string): boolean {
         if(!this.list.has(entityId)) return;
         Program.getInstance().store.dispatch(removeEntityDispatchAction(entityId));
         return this.list.delete(entityId);

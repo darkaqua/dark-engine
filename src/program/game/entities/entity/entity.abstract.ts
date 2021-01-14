@@ -4,11 +4,11 @@ import {
     removeEntityComponentDispatchAction
 } from "../../../store/components/dispatchers";
 import {ComponentTypes} from "../../components/component/component.types";
-import {getEntity} from "../../../store/entities";
 import {addEntityDispatchAction, updateEntityDispatchAction} from "../../../store/entities/dispatchers";
 import {v4} from "uuid";
 import {Program} from "../../../program";
 import {EntityEnum} from "./entity.enum";
+import {BaseEntityType} from "../../../store/entities";
 
 const getStore = () => Program.getInstance().store;
 
@@ -26,16 +26,40 @@ export abstract class EntityAbstract {
         getStore().dispatch(addEntityDispatchAction(this.id, this.entityEnum));
     }
 
-    getData<TData extends ComponentTypes>() {
-        return getEntity<TData>(this.id);
+    getComponents(): ComponentEnum[] {
+        return Object.keys(getStore().getState().entities[this.id])
+            .filter(id => ComponentEnum[id]) as ComponentEnum[]
     }
 
-    updateData<TData extends ComponentTypes>(data: TData) {
-        getStore().dispatch(updateEntityDispatchAction<TData>(this.id, data))
+    getComponentData<TComponentType extends ComponentTypes>(
+        componentEnum: ComponentEnum
+    ): TComponentType {
+        return this.getRawData()[componentEnum];
     }
 
-    addComponent(componentEnum: ComponentEnum, componentData: ComponentTypes) {
-        getStore().dispatch(addEntityComponentDispatchAction(componentEnum, this.id, componentData));
+    getRawData(): (ComponentTypes & BaseEntityType) {
+        return getStore().getState().entities[this.id];
+    }
+
+    updateComponentData<TComponentType extends ComponentTypes>(
+        componentEnum: ComponentEnum,
+        componentData: TComponentType
+    ) {
+        getStore().dispatch(updateEntityDispatchAction(
+            this.id,
+            { [componentEnum]: componentData })
+        );
+    }
+
+    addComponent(
+        componentEnum: ComponentEnum,
+        componentData: ComponentTypes
+    ) {
+        getStore().dispatch(addEntityComponentDispatchAction(
+            componentEnum,
+            this.id,
+            { [componentEnum]: componentData })
+        );
     }
 
     removeComponent(componentEnum: ComponentEnum) {
