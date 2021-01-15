@@ -61,7 +61,7 @@ export abstract class EntityAbstract {
 
     addComponent(
         componentEnum: ComponentEnum,
-        componentData: ComponentTypes
+        componentData?: ComponentTypes
     ) {
         getStore().dispatch(addEntityComponentDispatchAction(
             componentEnum,
