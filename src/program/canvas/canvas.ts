@@ -69,7 +69,7 @@ export class Canvas {
         Events.emit(EventEnum.LOAD);
         setTimeout(() => {
             this.setScreen(ScreenEnum.MENU);
-        }, 5000);
+        }, 3000);
     }
 
     private loop = (delta: number) => {

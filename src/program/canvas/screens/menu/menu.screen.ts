@@ -37,7 +37,7 @@ export class MenuScreen extends ScreenAbstract {
             canvas.setScreen(ScreenEnum.LOADING);
             setTimeout(() => {
                 canvas.setScreen(ScreenEnum.GAME);
-            }, 5000);
+            }, 1000);
         });
 
         this.addChild(menuText, playText);

@@ -9,8 +9,8 @@ export class BadGuy extends EntityAbstract {
         position: PIXI.IPointData
     ) {
         super(EntityEnum.BAD_GUY, 'BAD_GUY_ID');
-        this.addComponent(ComponentEnum.SPRITE, { [ComponentEnum.SPRITE]: { visible: true, texture: 'enemy' } })
-        this.addComponent(ComponentEnum.POSITION, { [ComponentEnum.POSITION]: position } );
+        this.addComponent(ComponentEnum.SPRITE, { visible: true, texture: 'enemy' })
+        this.addComponent(ComponentEnum.POSITION, { position } );
     }
 
 }

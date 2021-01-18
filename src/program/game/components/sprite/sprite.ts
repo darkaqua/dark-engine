@@ -9,10 +9,8 @@ export class Sprite extends ComponentAbstract<SpriteInterface> {
         super(
             ComponentEnum.SPRITE,
             {
-                [ComponentEnum.SPRITE]: {
-                    visible: true,
-                    texture: 'error'
-                }
+                visible: true,
+                texture: 'error'
             }
         );
     }

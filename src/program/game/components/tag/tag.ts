@@ -8,9 +8,7 @@ export class Tag extends ComponentAbstract<TagInterface> {
         super(
             ComponentEnum.TAG,
             {
-                [ComponentEnum.TAG]: {
-                    username: 'username'
-                }
+                username: 'username'
             }
         );
     }

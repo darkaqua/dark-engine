@@ -17,13 +17,14 @@ export class LoadingScreen extends ScreenAbstract {
             fontSize: 8,
             fill: '#9bbc0f'
         }));
+        this.textGUI.position.set(-10, 0)
         this.addChild(this.textGUI);
     }
 
     protected update(delta: number) {
         this.deltaAdded += delta;
 
-        if(10 > this.deltaAdded) return;
+        if(5 > this.deltaAdded) return;
         this.deltaAdded = 0;
 
         switch (this.textGUI.text) {

@@ -9,9 +9,7 @@ export class Container extends ComponentAbstract<ContainerInterface> {
         super(
             ComponentEnum.CONTAINER,
             {
-                [ComponentEnum.CONTAINER]: {
-                    visible: true
-                }
+                visible: true
             }
         );
     }

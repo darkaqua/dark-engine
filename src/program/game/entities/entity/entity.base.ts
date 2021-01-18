@@ -16,6 +16,6 @@ export class EntityBase extends EntityAbstract {
         Object.keys(baseEntityType)
             .filter(key => ComponentEnum[key])
             .map((componentEnum: ComponentEnum) =>
-                this.addComponent(componentEnum, { [componentEnum]: baseEntityType[componentEnum] } as ComponentTypes));
+                this.addComponent(componentEnum, baseEntityType[componentEnum] as ComponentTypes));
     }
 }

@@ -9,9 +9,7 @@ export class FollowCamera extends ComponentAbstract<FollowCameraInterface> {
         super(
             ComponentEnum.FOLLOW_CAMERA,
             {
-                [ComponentEnum.FOLLOW_CAMERA]: {
-                    follow: true
-                }
+                follow: true
             }
         );
     }

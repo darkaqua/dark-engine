@@ -14,16 +14,18 @@ import {FollowCamera} from "./followCamera/followCamera";
 export class Components {
 
     private readonly components: Map<ComponentEnum, ComponentAbstract<any>>;
+    private readonly store: Store<DefaultState, Actions>;
 
     constructor(store: Store<DefaultState, Actions>) {
         this.components = new Map<ComponentEnum, ComponentAbstract<any>>();
+        this.store = store;
 
-        this.addComponent(store, ComponentEnum.POSITION, new Position());
-        this.addComponent(store, ComponentEnum.TAG, new Tag());
-        this.addComponent(store, ComponentEnum.TARGET_DIRECTION, new TargetDirection());
-        this.addComponent(store, ComponentEnum.CONTAINER, new Container());
-        this.addComponent(store, ComponentEnum.SPRITE, new Sprite());
-        this.addComponent(store, ComponentEnum.FOLLOW_CAMERA, new FollowCamera());
+        this.add(ComponentEnum.POSITION, new Position());
+        this.add(ComponentEnum.TAG, new Tag());
+        this.add(ComponentEnum.TARGET_DIRECTION, new TargetDirection());
+        this.add(ComponentEnum.CONTAINER, new Container());
+        this.add(ComponentEnum.SPRITE, new Sprite());
+        this.add(ComponentEnum.FOLLOW_CAMERA, new FollowCamera());
     }
 
     get list() {
@@ -36,12 +38,11 @@ export class Components {
         return this.list.get(componentEnum);
     }
 
-    private addComponent<TComponentType extends ComponentTypes>(
-        store: Store<DefaultState, Actions>,
+    private add<TComponentType extends ComponentTypes>(
         componentEnum: ComponentEnum,
         component: ComponentAbstract<TComponentType>
     ) {
-        store.dispatch(addComponentDispatchAction(componentEnum));
+        this.store.dispatch(addComponentDispatchAction(componentEnum));
         this.components.set(componentEnum, component);
     }
 

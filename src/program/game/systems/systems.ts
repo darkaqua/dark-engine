@@ -27,12 +27,12 @@ export class Systems {
     }
 
     stopAll() {
-        this.list.forEach(system => system.stop());
+        this.list.forEach(system => system._stop());
     }
 
     update = (delta: number) => {
         if(Program.getInstance().canvas.getSelectedScreenEnum() !== ScreenEnum.GAME) return;
-        this.list.forEach(system => system.update(delta));
+        this.list.forEach(system => system._update(delta));
     }
 
     getSystemsByEntityId(entityId: string): SystemAbstract[] {

@@ -1,4 +1,3 @@
-
 import {SystemAbstract} from "../system/system.abstract";
 import {ComponentEnum} from "../../components/component/component.enum";
 import {PositionInterface} from "../../components/position/position.interface";
@@ -17,15 +16,20 @@ export class FollowCamera extends SystemAbstract {
         ]);
     }
 
-    initEntity(entity: EntityAbstract) {
-    }
-
-    updateEntity(delta: number, entity: EntityAbstract) {
-        const {
-            [ComponentEnum.POSITION]: position,
-            [ComponentEnum.SPRITE]: sprite,
-            [ComponentEnum.FOLLOW_CAMERA]: followCamera
-        } = entity.getData<PositionInterface & SpriteInterface & FollowCameraInterface>();
+    onUpdateEntity(delta: number, entity: EntityAbstract) {
+        const [
+            { position },
+            sprite,
+            followCamera
+        ] = entity.getComponentData<[
+            PositionInterface,
+            SpriteInterface,
+            FollowCameraInterface
+        ]>(
+            ComponentEnum.POSITION,
+            ComponentEnum.SPRITE,
+            ComponentEnum.FOLLOW_CAMERA
+        );
 
         if(!followCamera.follow || !sprite || !sprite.visible) return;
 
@@ -42,21 +46,10 @@ export class FollowCamera extends SystemAbstract {
             y: cameraPosition.y
         }
 
-        entity.updateData<PositionInterface>({ [ComponentEnum.POSITION]: targetPosition });
-
-    }
-
-    protected onDataEntityUpdate(
-        entity,
-        componentEnums ,
-        oldEntityData,
-        newEntityData
-    ) {
-
-    }
-
-    protected deleteEntity(entity: EntityAbstract) {
-        
+        entity.updateComponentData<[PositionInterface]>(
+            [ComponentEnum.POSITION],
+            [{ position: targetPosition }]
+        );
     }
 
 }

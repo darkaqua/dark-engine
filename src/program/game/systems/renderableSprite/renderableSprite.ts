@@ -17,12 +17,20 @@ export class RenderableSprite extends SystemAbstract {
         ]);
     }
 
-    initEntity(entity: EntityAbstract) {
-        const {
-            [ComponentEnum.POSITION]: position,
-            [ComponentEnum.SPRITE]: sprite,
-            [ComponentEnum.TAG]: tag
-        } = entity.getData<PositionInterface & SpriteInterface & TagInterface>();
+    onInitEntity(entity: EntityAbstract) {
+        const [
+            sprite,
+            { position },
+            tag
+        ] = entity.getComponentData<[
+            SpriteInterface,
+            PositionInterface,
+            TagInterface
+        ]>(
+            ComponentEnum.SPRITE,
+            ComponentEnum.POSITION,
+            ComponentEnum.TAG
+        );
 
         if(!sprite.visible) return;
 
@@ -48,11 +56,19 @@ export class RenderableSprite extends SystemAbstract {
         Program.getInstance().canvas.stage.addChild(spriteEntity);
     }
 
-    updateEntity(delta: number, entity: EntityAbstract) {
-        const {
-            [ComponentEnum.SPRITE]: sprite,
-            [ComponentEnum.POSITION]: position
-        } = entity.getData<SpriteInterface & PositionInterface>();
+    onUpdateEntity(delta: number, entity: EntityAbstract) {
+        const [
+            sprite,
+            { position }
+        ] = entity.getComponentData<[
+            SpriteInterface,
+            PositionInterface,
+            TagInterface
+        ]>(
+            ComponentEnum.SPRITE,
+            ComponentEnum.POSITION
+        );
+
         const canvas = Program.getInstance().canvas;
 
         const spriteEntity = canvas.stage.getChildByName(entity.id);
@@ -68,16 +84,7 @@ export class RenderableSprite extends SystemAbstract {
         canvas.stage.removeChild(spriteEntity);
     }
 
-    protected onDataEntityUpdate(
-        entity,
-        componentEnums ,
-        oldEntityData,
-        newEntityData
-    ) {
-
-    }
-
-    protected deleteEntity(entity: EntityAbstract) {
+    protected onRemoveEntity(entity: EntityAbstract) {
         const { stage } = Program.getInstance().canvas;
         stage.removeChild(stage.getChildByName(entity.id))
     }

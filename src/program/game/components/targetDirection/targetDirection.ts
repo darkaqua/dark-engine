@@ -9,9 +9,7 @@ export class TargetDirection extends ComponentAbstract<TargetDirectionInterface>
         super(
             ComponentEnum.TARGET_DIRECTION,
             {
-                [ComponentEnum.TARGET_DIRECTION]: {
-                    direction: TargetDirectionEnum.NONE
-                }
+                direction: TargetDirectionEnum.NONE
             }
         );
     }
